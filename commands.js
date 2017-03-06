@@ -21,5 +21,9 @@ module.exports = {
       })
       process.stdout.write('\nprompt >' )
     })
+  },
+  echo : function(input) {
+    process.stdout.write(input);
+    process.stdout.write('\nprompt >' )
   }
 }
