@@ -1,26 +1,25 @@
-// process.stdin.on('data', function (data) {
-//   var cmd = data.toString().trim(); // remove the newline
-//   if (cmd === 'pwd') {
-//     process.stdout.write(process.env.PWD);
-//   }
-//   process.stdout.write('\nprompt > ');
-// });
- 
-// process.stdin.on('data', function (data) {
-//   if (cmd === 'date') {
-//     var today = new Date();
-//     var formattedDate = today.toDateString() + " " + today.toTimeString();
-//     process.stdout.write(formattedDate)
-//   }
-// });
+var fs = require('fs');
 
 module.exports = {
-  pwd:function () {
+  pwd: function () {
     process.stdout.write(process.env.PWD);
+    process.stdout.write('\nprompt >' )
   },
-  date:function() {
+  date: function() {
     var today = new Date();
     var formattedDate = today.toDateString() + " " + today.toTimeString();
     process.stdout.write(formattedDate)
+    process.stdout.write('\nprompt >' )
+  },
+  ls: function() {
+    fs.readdir('.', function(err, files) {
+      if (err) {
+        throw err;
+      }
+      files.forEach(function(file){
+        process.stdout.write(file.toString() + '\n');
+      })
+      process.stdout.write('\nprompt >' )
+    })
   }
 }
